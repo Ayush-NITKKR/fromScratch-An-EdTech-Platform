@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --color-richblack-5: #F1F2FF;
+  --color-richblack-25: #F8F9FA;
+  --color-richblack-50: #F1F2FF;
+  --color-richblack-100: #AFB2BF;
+  --color-richblack-200: #999DAA;
+  --color-richblack-300: #838894;
+  --color-richblack-400: #6E727F;
+  --color-richblack-500: #585D69;
+  --color-richblack-600: #424854;
+  --color-richblack-700: #2C333F;
+  --color-richblack-800: #161D29;
+  --color-richblack-900: #000814;
+  
+  --color-yellow-5: #FFF9E6;
+  --color-yellow-50: #FFF9E6;
+  --color-yellow-100: #FFEAA6;
+  --color-yellow-200: #FFE080;
+  --color-yellow-300: #FFD559;
+  --color-yellow-400: #FFCA33;
+  --color-yellow-500: #FFC00D;
+  --color-yellow-600: #E6A700;
+  
+  --color-pink-50: #FFF0F5;
+  --color-pink-100: #FFD6E8;
+  --color-pink-200: #FF9ECA;
+  --color-pink-300: #FF66AB;
+  --color-pink-400: #FF2E8C;
+  --color-pink-500: #E60067;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
