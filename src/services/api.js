@@ -55,3 +55,10 @@ export const studentEndpoints = {
   COURSE_SUCCESS_MAIL_API: BASE_URL + "/payment/sendPaymentSuccessMail",
   PAYMENT_HISTORY_API: BASE_URL + "/payment/history",
 }
+
+// Contact Us
+
+export const contactUsEndpoint = {
+    CONTACT_US_API: BASE_URL + "/public/contact"
+}
+  

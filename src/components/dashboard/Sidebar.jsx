@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { sidebarLinks } from '../../../assets/additional data/additional files/data/dashboard-links';
+import { sidebarLinks } from '../../assets/additional data/additional files/data/dashboard-links';
 import { logout } from '../../services/authAPI';
 import SidebarLinks from './SidebarLink';
 import { FiLogOut, FiLoader } from "react-icons/fi";

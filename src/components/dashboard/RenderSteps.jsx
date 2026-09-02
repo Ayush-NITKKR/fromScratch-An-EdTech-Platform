@@ -1,9 +1,9 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import CourseInformationForm from "./CourseInformationFrom/CourseInformationForm";
-import CourseBuilderForm from "./CourseBuilder/CourseBuilderForm";
-import PublishCourse from "./PublishCourse/PublishCourse";
+import CourseInformationForm from "./CourseInformationForm"
+import CourseBuilderForm from "./CourseBuilderForm";
+import PublishCourse from "./PublishCourse";
 
 const RenderSteps = () => {
   const { step } = useSelector((state) => state.course);

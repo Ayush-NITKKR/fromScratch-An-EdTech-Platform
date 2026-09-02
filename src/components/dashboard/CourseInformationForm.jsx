@@ -4,8 +4,8 @@ import { toast } from "react-hot-toast"
 import { MdNavigateNext } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 import RequirementField from "./RequirementFeild"
-import ChipInput from "../ChipInput"
-import Upload from "../Upload"
+import ChipInput from "./ChipInput"
+import Upload from "./Upload"
 import {
   addCourseDetails,
   editCourseDetails,

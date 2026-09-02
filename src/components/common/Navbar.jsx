@@ -1,15 +1,15 @@
 import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
-import Logo from '../core/Homepage/Logo/Logo';
+import Logo from '../homepage/Logo';
 import NavebarLinks from '../../assets/additional data/additional files/data/navbar-links';
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '../core/Homepage/Button';
+import { Button } from '../homepage/Button';
 import { useEffect, useState } from 'react';
 import { apiConnector } from '../../services/apiconnector';
 import { categories } from '../../services/api';
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { FiLogIn, FiMenu, FiX } from "react-icons/fi";
-import ProfileDropdown from '../core/Navbar/DropDownMenu';
+import ProfileDropdown from '../navbar/DropDownMenu';
 
 const Navbar = () => {
     const { token } = useSelector((state) => state.auth);

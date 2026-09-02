@@ -1,10 +1,10 @@
 import { toast } from "react-hot-toast"
-import { apiConnector } from "../apiconnector"
-import { courseEndpoints, studentEndpoints } from "../api"
+import { apiConnector } from "./apiconnector"
+import { courseEndpoints, studentEndpoints } from "./api"
 import razorPay from '../assets/images/razor.png'
 import { setPaymentLoading } from "../store/courseSlice"
 import { resetCart } from "../store/cartSlice"
-import { data } from "react-router-dom"
+
 const key = import.meta.env.VITE_RAZORPAY_KEY;
 const {
   COURSE_CATEGORIES_API,

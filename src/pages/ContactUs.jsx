@@ -6,12 +6,13 @@ import { MdOutlineSubject } from "react-icons/md";
 import { IoCallOutline } from "react-icons/io5";
 import { MdOutlineMessage } from "react-icons/md";
 import Footer from "../components/common/Footer";
-
-
-
+import { apiConnector } from "../services/apiconnector";
+import { contactUsEndpoint } from "../services/api";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../store/profileSlice";
 const ContactUs = () =>{
             const navigate = useNavigate();
-
+            const dispatch = useDispatch();
             const [formData, setFormData] = useState({
               firstName: "",
               lastName: "",
@@ -28,12 +29,20 @@ const ContactUs = () =>{
             }));
             };
 
-            function handleSubmit(e){
-                e.preventDefault();
-
-                // Mock API call
-                toast.success("Message sent successfully!");
+          async function handleSubmit(e){
+            e.preventDefault();
+            console.log("RESPONSE from CONTACT US");
+            const toastid = toast.loading("Sending message...")
+            try{
+                setLoading(true)
                 
+                const response = await apiConnector("POST", contactUsEndpoint.CONTACT_US_API, formData);
+
+
+                if(!response.data.success){
+                   throw new Error("Invalid request!")
+                }
+                toast.success("Message sent successfully!");
                 setFormData({
                   firstName: "",
                   lastName: "",
@@ -42,7 +51,13 @@ const ContactUs = () =>{
                   subject: "",
                   message: "",
                 });
+            }catch(error){
+              toast.error("Something went wrong");
+              console.log(error);
             }
+            toast.dismiss(toastid);
+            setLoading(false)
+          }
 
 
     return(

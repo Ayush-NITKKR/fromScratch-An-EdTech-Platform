@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import FormLabel from "../../../common/FormLabel";
-import RequiredAsterisk from "../../../common/RequiredAsterisk";
-import DropDown from "../../../common/DropDown";
-import { apiConnector } from "../../../../services/apiconnector";
-import { categories } from "../../../../services/api";
+import FormLabel from "../common/FormLabel";
+import RequiredAsterisk from "../common/RequiredAsterisk";
+import DropDown from "../common/DropDown";
+import { apiConnector } from "../../services/apiconnector";
+import { categories } from "../../services/api";
 import RenderSteps from "./RenderSteps";
 export default function AddCourse(){
 

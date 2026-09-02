@@ -3,35 +3,42 @@ const {mailTemplate, confirmationMail} = require("../mail/templates/contactUsMai
 
 exports.contactUs = async (req,res) => {
     try {
-        //Get the data
-        const {first_name , last_name , email , phoneNumber ,message} = req.body;
+        // Get the data — field names match the frontend formData keys
+        const { firstName, lastName, email, phoneNo, subject, message } = req.body;
 
-        //Validate the Email
-        if(!first_name || !last_name || !email || !phoneNumber){
-            return res.status(404).json({
-                success:false,
-                message:"All feilds are required"
-            })
+        // Validate required fields
+        if(!firstName || !lastName || !email || !phoneNo){
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
         }
-        //send the mail to the admin (ayushtiwari449@gmail.com)
-        await mailSender("ayushtiwari449@gmail.com",
-            "User Message To Our team",
-            mailTemplate({ first_name,last_name,email,phoneNumber,message })
+
+        // Send the message to the admin
+        await mailSender(
+            "ayushtiwari449@gmail.com",
+            `Contact Us: ${subject || "New Message"}`,
+            mailTemplate({ first_name: firstName, last_name: lastName, email, phoneNumber: phoneNo, message })
         );
-        // send mail to user for conformation 
-        await mailSender(email,
-            "Hyy we get Our messageSuccessfully",
-             confirmationMail({ first_name,last_name,email,phoneNumber,message }));
+
+        // Send a confirmation email to the user
+        await mailSender(
+            email,
+            "We received your message!",
+            confirmationMail({ first_name: firstName, last_name: lastName, email, phoneNumber: phoneNo, message })
+        );
         
         return res.status(200).json({
-            success:true,
-            message:"Message sent successfully"
+            success: true,
+            message: "Message sent successfully"
         });
 
-    } catch {
+    } catch(error) {
+        // Bug fix: catch now logs the error — previously was catch {} with no param
+        console.error("ContactUs API Error:", error);
         return res.status(500).json({
-            success:false,
-            message:"Something Went wrong"
-        })
+            success: false,
+            message: "Something went wrong"
+        });
     }
 }

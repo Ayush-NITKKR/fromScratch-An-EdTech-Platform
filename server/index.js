@@ -8,6 +8,7 @@ const userRoutes = require('./routes/User');
 const profileRoutes = require("./routes/Profile");
 const paymentRoutes = require("./routes/Payments");
 const courseRoutes = require("./routes/Courses");
+const publicRoutes = require("./routes/Public");
 
 //Database setup
 const database = require("./config/db");
@@ -49,6 +50,7 @@ app.use("/api/v1/auth",userRoutes);
 app.use("/api/v1/profile",profileRoutes);
 app.use("/api/v1/course",courseRoutes);
 app.use("/api/v1/payment",paymentRoutes);
+app.use("/api/v1/public",publicRoutes);
 
 
 //def route
