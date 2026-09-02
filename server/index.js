@@ -28,13 +28,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin || /^http:\/\/localhost:\d+$/.test(origin) || (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL)) {
+
+        if (
+            !origin ||
+            /^http:\/\/localhost:\d+$/.test(origin) ||
+            origin === "https://from-scratch-frontend.vercel.app" ||
+            origin.endsWith(".vercel.app")
+        ) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: true,
+    credentials: true
 }));
 app.use(
     fileUpload({
