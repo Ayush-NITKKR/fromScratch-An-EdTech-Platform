@@ -7,41 +7,62 @@ const { uploadImagetoCloudinary } = require("../utils/imageUploader");
 exports.updateProfile = async (req ,res) => {
     try {
         // Get the data from Request
-        const {dateOfBirth ="" , about="" , contactNumber , gender} = req.body;
+        const { firstName, lastName, dateofBirth = "", dateOfBirth = "", about = "", contactNumber = "", contact = "", gender = "" } = req.body;
         //get the userId from the req
         const userID = req.user.id;
         // validate the data
-        if(!contactNumber || !gender || !userID){
-            return res.status(403).json({
+        if(!userID){
+            return res.status(400).json({
                 success:false,
-                message:"Details are not found"
+                message:"User ID is missing"
             });
         }
         // Get the profile detail from the database
         const userDetail = await User.findById(userID);
+        if(!userDetail){
+            return res.status(404).json({
+                success:false,
+                message:"User not found"
+            });
+        }
+
+        if (firstName) userDetail.firstName = firstName;
+        if (lastName) userDetail.lastName = lastName;
+        await userDetail.save();
+
         const profileId = userDetail.additionalDetails;
-        const profileDetail = await Profile.findById(profileId);
+        let profileDetail = await Profile.findById(profileId);
+        if (!profileDetail) {
+            profileDetail = await Profile.create({
+                gender: gender || null,
+                dateofBirth: dateofBirth || dateOfBirth || null,
+                about: about || null,
+                contact: contactNumber || contact || null,
+            });
+            userDetail.additionalDetails = profileDetail._id;
+            await userDetail.save();
+        } else {
+            if (dateofBirth || dateOfBirth) profileDetail.dateofBirth = dateofBirth || dateOfBirth;
+            if (about !== undefined) profileDetail.about = about;
+            if (gender) profileDetail.gender = gender;
+            if (contactNumber || contact) profileDetail.contact = contactNumber || contact;
+            await profileDetail.save();
+        }
 
-        //update the details from the profile
+        const updatedUser = await User.findById(userID).populate("additionalDetails").exec();
+        updatedUser.password = undefined;
 
-        profileDetail.dateofBirth = dateOfBirth;
-        profileDetail.about=about;
-        profileDetail.gender=gender;
-        profileDetail.contact=contactNumber;
-        
-        await profileDetail.save();
-
-        // return the reponse
-
+        // return the response
         return res.status(200).json({
             success:true,
-            message:"profile is updated successfully",
-            profileDetail
+            message:"Profile is updated successfully",
+            profileDetail,
+            data: updatedUser
         });
     } catch (error) {
         return res.status(500).json({
             success:false,
-            message:error.message || "Something went wrong while update the profile"
+            message:error.message || "Something went wrong while updating the profile"
         });
     }
 }
@@ -58,19 +79,18 @@ exports.updateProfilePicture = async (req,res) => {
 
         // Validation of File
             
-        const supportedExtension = ["jpg","png","jpeg","gif","svg"];
+        const supportedExtension = ["jpg","png","jpeg","gif","svg","webp"];
 
         const ext = file.name.split(".").pop().toLowerCase();
 
         if(!supportedExtension.includes(ext)){
             return res.status(400).json({
                 success:false,
-                message:"Give only supported extentions is allowed"
+                message:"Only supported extensions (jpg, png, jpeg, gif, svg, webp) are allowed"
             });
         }
 
-        // Upload the file in the cloudinary
-
+        // Upload the file in cloudinary
         const response = await uploadImagetoCloudinary(file,process.env.FOLDER_NAME);
 
         // update the profile of user
@@ -80,13 +100,16 @@ exports.updateProfilePicture = async (req,res) => {
             image:response.secure_url,
         },{
             new:true,
-        })
+        }).populate("additionalDetails");
 
-        return res.status(201).json({
+        updatedData.password = undefined;
+
+        return res.status(200).json({
             success:true,
             message:"Updated successfully",
             data:updatedData
         }) 
+
 
         
     } catch (error) { 

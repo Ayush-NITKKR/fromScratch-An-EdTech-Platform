@@ -77,12 +77,15 @@ export function login(email, password, navigate) {
             }
             toast.success("Login Successful");
             dispatch(setToken(response.data.token));
-            const userImage = response.data?.existingUser?.image
-                ? response.data.existingUser.image
-                : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.existingUser.firstName} ${response.data.existingUser.lastName}`;
-            dispatch(setUser({ ...response.data.existingUser, image: userImage }));
+
+            // Bug fix: server returns user as `doesExist`, not `existingUser`
+            const loggedInUser = response.data.doesExist;
+            const userImage = loggedInUser?.image
+                ? loggedInUser.image
+                : `https://api.dicebear.com/5.x/initials/svg?seed=${loggedInUser?.firstName} ${loggedInUser?.lastName}`;
+            dispatch(setUser({ ...loggedInUser, image: userImage }));
             localStorage.setItem("token", JSON.stringify(response.data.token));
-            localStorage.setItem("user", JSON.stringify(response.data.existingUser));
+            localStorage.setItem("user", JSON.stringify(loggedInUser));
             navigate("/dashboard/my-profile");
         } catch (error) {
             console.log("LOGIN API ERROR:", error);
@@ -92,6 +95,7 @@ export function login(email, password, navigate) {
         dispatch(setLoading(false));
     };
 }
+
 
 export function sendOtp(email) {
     return async (dispatch) => {

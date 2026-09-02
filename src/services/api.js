@@ -14,11 +14,11 @@ export const catalogData = {
   CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
 }
 export const endpoints = {
-  SENDOTP_API: BASE_URL + "/auth/sendotp",
-  RESETPASSTOKEN_API: BASE_URL + "/Profile/reset-password-token",
-  RESETPASSWORD_API: BASE_URL + "/Profile/reset-password",
-  UPDATEPROFILEPICTURE_API: BASE_URL + "/Profile/updateProfilePicture",
-  UPDATEPROFILEDATA_API: BASE_URL + "/Profile/updateProfile"
+  SENDOTP_API: BASE_URL + "/auth/sendOtp",
+  RESETPASSTOKEN_API: BASE_URL + "/profile/reset-password-token",
+  RESETPASSWORD_API: BASE_URL + "/profile/reset-password",
+  UPDATEPROFILEPICTURE_API: BASE_URL + "/profile/updateProfilePicture",
+  UPDATEPROFILEDATA_API: BASE_URL + "/profile/updateProfile"
 }
 // PROFILE ENDPOINTS
 export const profileEndpoints = {

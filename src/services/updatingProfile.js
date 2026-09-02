@@ -6,7 +6,7 @@ import { setUser } from "../store/profileSlice";
 
 export function updateProfilePicture(formData , token){
     return async (dispatch) =>{
-        const toastId = toast.loading("uploading profile picture..");
+        const toastId = toast.loading("Uploading profile picture...");
         dispatch(setLoading(true));
 
         try {
@@ -16,28 +16,28 @@ export function updateProfilePicture(formData , token){
           }
             )
 
-            console.log(response);
-
             if(!response.data.success){
-                throw new Error("File is not uplodeding");  
+                throw new Error("File could not be uploaded");  
             }
             const updatedUser = response.data?.data;
-            console.log(updatedUser);
-            dispatch(setUser(updatedUser));
-            toast.success("uploaded successfully");
+            if (updatedUser) {
+                dispatch(setUser(updatedUser));
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            }
+            toast.success("Profile picture updated successfully");
             
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message || "Failed to update profile picture");
+        } finally {
             toast.dismiss(toastId);
-            
+            dispatch(setLoading(false));
         }
-        toast.dismiss(toastId);
     }
-
 }
+
 export function updateProfileData(formData , token , navigate){
     return async (dispatch) =>{
-        const toastId = toast.loading("uploading profile picture..");
+        const toastId = toast.loading("Updating profile...");
         dispatch(setLoading(true));
 
         try {
@@ -47,21 +47,21 @@ export function updateProfileData(formData , token , navigate){
           }
             )
 
-            console.log(response);
-
             if(!response.data.success){
-                throw new Error("File is not uplodeding");  
+                throw new Error(response.data?.message || "Profile could not be updated");  
             }
-            const updatedUser = response.data?.profile;
-            dispatch(setUser(updatedUser));
-            toast.success("updated successfully");
-            navigate('/dashboard/my-profile')
+            const updatedUser = response.data?.data;
+            if (updatedUser) {
+                dispatch(setUser(updatedUser));
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            }
+            toast.success("Profile updated successfully");
+            navigate('/dashboard/my-profile');
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message || "Failed to update profile");
+        } finally {
             toast.dismiss(toastId);
-            
+            dispatch(setLoading(false));
         }
-        toast.dismiss(toastId);
     }
-
 }

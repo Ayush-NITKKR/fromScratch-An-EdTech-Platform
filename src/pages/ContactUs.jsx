@@ -8,11 +8,8 @@ import { MdOutlineMessage } from "react-icons/md";
 import Footer from "../components/common/Footer";
 import { apiConnector } from "../services/apiconnector";
 import { contactUsEndpoint } from "../services/api";
-import { useDispatch } from "react-redux";
-import { setLoading } from "../store/profileSlice";
 const ContactUs = () =>{
             const navigate = useNavigate();
-            const dispatch = useDispatch();
             const [formData, setFormData] = useState({
               firstName: "",
               lastName: "",
@@ -34,10 +31,7 @@ const ContactUs = () =>{
             console.log("RESPONSE from CONTACT US");
             const toastid = toast.loading("Sending message...")
             try{
-                setLoading(true)
-                
                 const response = await apiConnector("POST", contactUsEndpoint.CONTACT_US_API, formData);
-
 
                 if(!response.data.success){
                    throw new Error("Invalid request!")
@@ -56,7 +50,6 @@ const ContactUs = () =>{
               console.log(error);
             }
             toast.dismiss(toastid);
-            setLoading(false)
           }
 
 
