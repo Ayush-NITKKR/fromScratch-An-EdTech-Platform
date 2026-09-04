@@ -21,15 +21,41 @@ const Footer = () =>{
                     <div className='w-[90%] text-[15px] font-[500] text-[#94a3b8] leading-8'>Terms & Conditions</div>
                     <div className='w-[90%] text-[15px] font-[500] text-[#94a3b8]  leading-8'>Privacy Policy</div>
                 </div>
-                <div className='w-[25%] flex flex-col gap-4 px-2' >
-                    <div className='text-[#efe7fffd] text-[24px] font-[700] font-poppins'>Stay Connected</div>
-                    <div className='w-[90%] text-[15px] font-[500] text-[#94a3b8] gap-5 leading-8'>Don't let your dreams stay dreams. Build your skills with us and turn them into reality.</div>
-                    <div className='flex flex-row gap-10'>
-                        <Link to={"https://www.youtube.com/@LWA2003"}><div><img src="https://coderarmy.in/assets/images/youtube-logo.svg" alt="" className='pt-3' height={40} width={35}/></div></Link>
-                        <Link to={"https://www.linkedin.com/in/ayush-tiwari-513146290/"}><div><img src="https://static.vecteezy.com/system/resources/thumbnails/023/986/926/small/linkedin-logo-linkedin-logo-transparent-linkedin-icon-transparent-free-free-png.png" alt="" height={50} width={40}/></div></Link>
-                        <Link to={'https://www.instagram.com/__ayuussh_/'}><div><img src="https://static.vecteezy.com/system/resources/thumbnails/038/447/961/small/ai-generated-instagram-logo-free-png.png" alt="" height={40} width={40}/></div></Link>
+                    <div className='w-full md:w-[25%] flex flex-col gap-4'>
+                        <div className='text-[#efe7fffd] text-[24px] font-[700] font-poppins'>
+                            Stay Connected
+                        </div>
+
+                        <div className='w-full text-[15px] font-[500] text-[#94a3b8] leading-8'>
+                            Don't let your dreams stay dreams. Build your skills with us and turn them into reality.
+                        </div>
+
+                        <div className='flex items-center gap-8 mt-2'>
+                            <Link to="https://www.youtube.com/@LWA2003">
+                                <img
+                                    src="https://coderarmy.in/assets/images/youtube-logo.svg"
+                                    alt="YouTube"
+                                    className='w-12 h-12 object-contain'
+                                />
+                            </Link>
+
+                            <Link to="https://www.linkedin.com/in/ayush-tiwari-513146290/">
+                                <img
+                                    src="https://static.vecteezy.com/system/resources/thumbnails/023/986/926/small/linkedin-logo-linkedin-logo-transparent-linkedin-icon-transparent-free-free-png.png"
+                                    alt="LinkedIn"
+                                    className='w-14 h-14 object-contain'
+                                />
+                            </Link>
+
+                            <Link to="https://www.instagram.com/__ayuussh_/">
+                                <img
+                                    src="https://static.vecteezy.com/system/resources/thumbnails/038/447/961/small/ai-generated-instagram-logo-free-png.png"
+                                    alt="Instagram"
+                                    className='w-14 h-14 object-contain'
+                                />
+                            </Link>
+                        </div>
                     </div>
-                </div>
             </div>
             <div className="h-[4px] w-11/12  max-w-maxContent mx-auto bg-gray-800 m-5"></div>
             <div className='w-[90%] text-[15px] font-[500] text-[#94a3b8] gap-5 leading-8'>Copyright © 2026 by from-scratch | All Rights Reserved.</div>

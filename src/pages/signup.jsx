@@ -211,7 +211,7 @@ const Signup = () =>{
 
       {/* OTP */}
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 flex-col md:flex-row">
 
         <input
           type="text"
@@ -224,7 +224,7 @@ const Signup = () =>{
 
         <button
           type="button"
-          className="bg-yellow-400 text-black px-4 rounded-lg hover:bg-yellow-300 transition"
+          className=" bg-yellow-400 text-black px-4 rounded-lg hover:bg-yellow-300 transition"
           onClick={() => dispatch(sendOtp(formData.email))}
         >
           Send OTP
