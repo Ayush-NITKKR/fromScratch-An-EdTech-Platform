@@ -162,7 +162,7 @@ exports.signUp = async (req, res) => {
     const {firstName ,
          lastName , 
          email ,
-         phoneNo , 
+         phoneNo, 
          password ,
         Repassword,
         accountType,
@@ -170,6 +170,7 @@ exports.signUp = async (req, res) => {
     } = req.body;
 
 //Validate the Data
+    console.log(req.body)
 
     if(!firstName || !lastName || !email || !phoneNo || !password || !Repassword || !accountType || !otp){
         return res.status(400).json({
@@ -254,7 +255,9 @@ exports.signUp = async (req, res) => {
         message:"User registerd successfully"
     });
 }
-catch {
+catch(error){
+        console.log(error);
+        
         return res.status(500).json({
             success:false,
             message:"Unable to signup"

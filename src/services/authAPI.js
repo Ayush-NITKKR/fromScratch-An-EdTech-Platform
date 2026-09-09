@@ -127,12 +127,12 @@ export function signUp(formData, navigate) {
                 lastName: formData.lastName,
                 email: formData.email,
                 password: formData.password,
-                confirmPassword: formData.Repassword,
+                Repassword: formData.Repassword,
                 accountType: formData.accountType,
                 otp: formData.otp,
-                contactNumber: formData.phoneNo,
+                phoneNo: formData.phoneNo,
             });
-            console.log("SIGNUP API RESPONSE:", response);
+            
             if (!response.data.success) {
                 throw new Error(response.data.message);
             }
