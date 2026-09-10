@@ -172,7 +172,7 @@ const CartPage = () => {
             </p>
           </div>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/catalog/ai")}
             className="mt-2 rounded-xl bg-[#7C3AED] px-6 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#6D28D9]"
           >
             Browse Courses
