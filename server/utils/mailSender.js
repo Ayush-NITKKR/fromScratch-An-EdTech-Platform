@@ -3,8 +3,8 @@ require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT || 587,
-    secure: false, // true if port 465
+    port: 465,
+    secure: true, // true if port 465
     auth: {
         user: process.env.MAIL_ID,
         pass: process.env.MAIL_PASS,
@@ -21,7 +21,6 @@ const mailSender = async (email, title, body) => {
 
 
     try {
-        const start = performance.now();
 
         const info = await transporter.sendMail({
             from: process.env.MAIL_ID,
@@ -29,7 +28,6 @@ const mailSender = async (email, title, body) => {
             subject: title,
             html: body, 
         });
-
 
         return info;
     } catch (error) {
